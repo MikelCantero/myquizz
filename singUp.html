@@ -34,9 +34,14 @@
 				
 				if (i == 0){	
 					
-					if(!surnameControl(document.getElementById("n").value)){
+					if(!nameControl(document.getElementById("n").value)){
 						v = 1;
-						alert("You should fill the Name gap with two surnames!");
+						alert("Names first character in capital letter!");
+					}
+					
+					if(!surnameControl(document.getElementById("sn").value)){
+						v = 1;
+						alert("You should fill the Surname gap with two surnames!");
 					}
 
 					if(document.getElementById("p").value.length < 6){
@@ -85,11 +90,19 @@
 			return 0;
 			}
             		
-			function surnameControl(name){
+			function surnameControl(sname){
 				
-				var regex = /([A-Z])([a-z])+ ([A-Z])([a-z])+ ([A-Z])([a-z])+/g;
+				var regex = /([A-Z])([a-z])+ ([A-Z])([a-z])+/g;
+					
+				return regex.test(sname);
+			}
+			
+			function nameControl(name){
+			
+				var regex = /([A-Z])([a-z])+/g;
 					
 				return regex.test(name);
+						
 			}
 			           
 			function telephoneControl(phone){
@@ -117,7 +130,7 @@
 
 	<body background = "fondo.jpg">
 		
-		<form id="erregistro" name="erregistro" onSubmit="baliozkoa()">
+		<form id="erregistro" name="erregistro" onSubmit="baliozkoa()" method = "post" action = "Enroll.php">
 
 		<p><font face="Arial" size="3">
 			
@@ -125,8 +138,10 @@
 			
 			<legend> Personal information: </legend><br>
 			
-			Name (should include 2 surnamnes with it):*<br>
+			Name:*<br>
 			<input type="text" name="Name" id="n"><br>
+			Surname(include 2 surnames):*<br>
+			<input type="text" name="SName" id="sn"><br>
 			Password:*<br>
 			<input type="password" name="Password" id ="p"><br>
 			E-mail:* <br>
@@ -134,7 +149,7 @@
 			Phone number:*<br>
 			<input type="text" name= "Telephone" id="t"></input><br>
 			Speciality:*<br>
-			<select>
+			<select name="Speciality">
 				<option value=""></option>
 				<option value="Software Engineering">Software Engineering</option>
 				<option value="SpecialityComputational Engineering">Computational Engineering</option>
